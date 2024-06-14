@@ -3,8 +3,8 @@ import translations from "@/core/i18n/projects/tanuki/privacy.json" with {
 	type: "json",
 };
 
-import type { PageProps } from "$fresh/server.ts";
-import type { State } from "@/core/types.ts";
+import type { PageProps } from "fresh";
+import type { State } from "@/utils.ts";
 
 const LAST_UPDATED = {
 	original: new Date("2023-03-18"),

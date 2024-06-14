@@ -1,15 +1,15 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
 import { join } from "@std/path";
-import { Head } from "$fresh/runtime.ts";
 import { CSS, render } from "@deno/gfm";
+import type { PageProps, RouteHandler } from "fresh";
 
 import { ButtonLink, SiteTitle } from "@/components/mod.tsx";
 import translations from "@/core/i18n/notes.json" with { type: "json" };
-import type { AllowedLanguage, State } from "@/core/types.ts";
+import type { AllowedLanguage } from "@/core/types.ts";
+import type { State } from "@/utils.ts";
 
 // Additional syntax highlighting
-import "prism/prism-bash?no-check";
-import "prism/prism-nginx?no-check";
+// import "prism/prism-bash?no-check";
+// import "prism/prism-nginx?no-check";
 
 type BlogProps = {
 	lang: AllowedLanguage;
@@ -17,8 +17,8 @@ type BlogProps = {
 	body: string;
 };
 
-export const handler: Handlers<BlogProps, State> = {
-	async GET(_req, ctx) {
+export const handler: RouteHandler<BlogProps, State> = {
+	async GET(ctx) {
 		// Encode the slug to prevent directory traversal
 		const slug = encodeURIComponent(ctx.params.slug);
 		const lang = ctx.state.language;
@@ -34,7 +34,7 @@ export const handler: Handlers<BlogProps, State> = {
 
 			return await ctx.render({ lang, title, body });
 		} catch {
-			return await ctx.renderNotFound();
+			return ctx.error(404);
 		}
 	},
 };
@@ -46,7 +46,7 @@ export default function Notes(
 
 	return (
 		<>
-			<Head>
+			<head>
 				<title>
 					{props.data.title} &middot; {translations[lang].notes.heading}
 				</title>
@@ -73,7 +73,7 @@ export default function Notes(
 				`,
 					}}
 				/>
-			</Head>
+			</head>
 			<div>
 				<SiteTitle name={translations[lang].notes.heading} />
 				<p class="my-2.5">

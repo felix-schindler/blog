@@ -1,5 +1,3 @@
-import { Handlers } from "$fresh/server.ts";
-
 import { feature } from "https://esm.sh/topojson-client@3.1.0";
 import { geoSatellite } from "https://esm.sh/d3-geo-projection@4.0.0";
 import { geoPath } from "https://esm.sh/d3-geo@3.1.0";
@@ -8,6 +6,7 @@ import { tw } from "@/core/colors.ts";
 import topology from "@/core/land-110m.json" with { type: "json" };
 import { isAllowedLanguage } from "@/core/i18n/mod.ts";
 import type { AllowedLanguage } from "@/core/types.ts";
+import { Handlers } from "fresh/compat";
 
 const land = feature(topology, topology.objects.land);
 
@@ -169,7 +168,7 @@ function render(region: Region, isDark: boolean) {
 }
 
 export const handler: Handlers = {
-	GET(_req, ctx) {
+	GET(ctx) {
 		const searchParams = ctx.url.searchParams;
 
 		// Get values from params

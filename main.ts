@@ -1,11 +1,17 @@
-/// <reference no-default-lib="true" />
-/// <reference lib="dom" />
-/// <reference lib="dom.iterable" />
-/// <reference lib="dom.asynciterable" />
-/// <reference lib="deno.ns" />
+import { App, fsRoutes, staticFiles } from "fresh";
+import { State } from "@/utils.ts";
 
-import { start } from "$fresh/server.ts";
-import manifest from "./fresh.gen.ts";
-import config from "./fresh.config.ts";
+export const app = new App<State>();
+app.use(staticFiles());
 
-await start(manifest, config);
+app.get("/api/:joke", () => new Response("Hello World"));
+
+await fsRoutes(app, {
+	dir: "./",
+	loadIsland: (path) => import(`./islands/${path}`),
+	loadRoute: (path) => import(`./routes/${path}`),
+});
+
+if (import.meta.main) {
+	await app.listen();
+}

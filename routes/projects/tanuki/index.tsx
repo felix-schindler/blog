@@ -8,8 +8,8 @@ import IconMessageQuestion from "icons/message-question.tsx";
 import IconFileText from "icons/file-text.tsx";
 import IconBrandAndroid from "icons/brand-android.tsx";
 
-import type { PageProps } from "$fresh/server.ts";
-import type { State } from "@/core/types.ts";
+import type { PageProps } from "fresh";
+import type { State } from "@/utils.ts";
 
 export default function Tanuki(props: PageProps<never, State>) {
 	const lang = props.state.language;

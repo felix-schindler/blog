@@ -1,13 +1,15 @@
 import { getCookies, setCookie } from "@std/http/cookie";
-import type { FreshContext } from "$fresh/server.ts";
+import type { FreshContext } from "fresh";
 
 import { isAllowedLanguage } from "@/core/i18n/mod.ts";
-import type { AllowedLanguage, State } from "@/core/types.ts";
+import type { AllowedLanguage } from "@/core/types.ts";
+import type { State } from "@/utils.ts";
 
 export async function handler(
-	req: Request,
 	ctx: FreshContext<State>,
 ): Promise<Response> {
+	const req = ctx.req;
+
 	// Get current URL and pathname
 	const currentUrl = ctx.url;
 	const pathname = currentUrl.pathname;

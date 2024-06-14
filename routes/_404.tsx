@@ -1,12 +1,11 @@
-import { Head } from "$fresh/runtime.ts";
 import { ButtonLink } from "@/components/mod.tsx";
 
 export default function Error404() {
 	return (
 		<>
-			<Head>
+			<head>
 				<title>404 - Page not found</title>
-			</Head>
+			</head>
 			<div class="h-full grid place-items-center">
 				<div class="flex flex-col gap-5 text-center">
 					<h1 class="mt-5 text-6xl font-mono font-bold tracking-tighter">

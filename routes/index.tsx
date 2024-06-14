@@ -6,7 +6,7 @@ import {
 	Photos,
 	Timeline,
 } from "@/components/home/mod.tsx";
-import type { PageProps } from "$fresh/server.ts";
+import type { PageProps } from "fresh";
 import type { State } from "@/core/types.ts";
 
 export default function Home(props: PageProps<never, State>) {

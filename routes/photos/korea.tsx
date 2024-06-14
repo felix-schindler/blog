@@ -4,8 +4,9 @@ import ImageCollection from "@/components/photos/ImageCollection.tsx";
 import Parallax from "@/components/photos/Parallex.tsx";
 import ScrollEffect from "@/islands/ScrollEffect.tsx";
 
-import type { Handlers, PageProps } from "$fresh/server.ts";
-import type { AllowedLanguage, State } from "@/core/types.ts";
+import type { PageProps, RouteHandler } from "fresh";
+import type { AllowedLanguage } from "@/core/types.ts";
+import type { State } from "@/utils.ts";
 
 const baseImagePath = join("img", "photos", "korea");
 
@@ -59,8 +60,8 @@ type PhotoProps = {
 	files: Record<string, Array<string>>;
 };
 
-export const handler: Handlers<PhotoProps, State> = {
-	async GET(_req, ctx) {
+export const handler: RouteHandler<PhotoProps, State> = {
+	async GET(ctx) {
 		const files: Record<string, Array<string>> = {};
 		const baseDirEntries = Deno.readDir(
 			join(Deno.cwd(), "static", baseImagePath),

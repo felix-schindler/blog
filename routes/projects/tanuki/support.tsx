@@ -3,8 +3,8 @@ import translations from "@/core/i18n/projects/tanuki/support.json" with {
 	type: "json",
 };
 
-import type { PageProps } from "$fresh/server.ts";
-import type { State } from "@/core/types.ts";
+import type { PageProps } from "fresh";
+import type { State } from "@/utils.ts";
 
 export default function TanukiSupport(props: PageProps<never, State>) {
 	const lang = props.state.language;

@@ -1,9 +1,9 @@
-import { Handlers } from "$fresh/server.ts";
 import { isAllowedLanguage } from "@/core/i18n/mod.ts";
 import { join } from "@std/path";
+import { Handlers } from "fresh/compat";
 
 export const handler: Handlers = {
-	async GET(_req, ctx) {
+	async GET(ctx) {
 		const searchParams = ctx.url.searchParams;
 		const dark = searchParams.has("dark");
 		let lang = searchParams.get("lang");

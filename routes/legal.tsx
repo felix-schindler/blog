@@ -1,7 +1,7 @@
 import { ButtonLink, Link } from "@/components/mod.tsx";
 import { back_to_home } from "@/core/i18n/mod.ts";
-import type { State } from "@/core/types.ts";
-import type { PageProps } from "$fresh/server.ts";
+import type { State } from "@/utils.ts";
+import type { PageProps } from "fresh";
 
 const not_avail = {
 	en:

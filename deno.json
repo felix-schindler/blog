@@ -1,33 +1,44 @@
 {
 	"lock": false,
 	"tasks": {
-		"check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-		"cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
-		"manifest": "deno task cli manifest $(pwd)",
-		"start": "deno run -A --watch=static/,routes/ dev.ts",
-		"build": "deno run -A dev.ts build",
-		"preview": "deno run -A main.ts",
-		"update": "deno run -A -r https://fresh.deno.dev/update ."
+		"check": "DENO_FUTURE=1 deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+		"dev": "DENO_FUTURE=1 deno run -A --watch=static/,routes/ dev.ts",
+		"build": "DENO_FUTURE=1 deno run -A dev.ts build",
+		"start": "DENO_FUTURE=1 deno run -A main.ts",
+		"update": "DENO_FUTURE=1 deno run -A -r jsr:@fresh/update ."
 	},
 	"lint": { "rules": { "tags": ["fresh", "recommended"] } },
 	"exclude": ["**/_fresh/*"],
 	"fmt": { "useTabs": true },
 	"imports": {
-		"$fresh/": "https://deno.land/x/fresh@1.6.8/",
 		"@/": "./",
-		"@deno/gfm": "jsr:@deno/gfm@^0.8.0",
-		"@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
-		"@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
-		"@std/http/cookie": "jsr:@std/http@^0.220.1/cookie",
-		"@std/path": "jsr:@std/path@^0.220.1",
+		"@deno/gfm": "jsr:@deno/gfm@^0.8.2",
+		"@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^0.0.1-alpha.7",
+		"@preact/signals": "npm:@preact/signals@^1.2.3",
+		"@std/http": "jsr:@std/http@^0.224.4",
+		"@std/path": "jsr:@std/path@^0.225.2",
+		"fresh": "jsr:@fresh/core@^2.0.0-alpha.16",
 		"icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
-		"preact": "https://esm.sh/preact@10.19.6",
-		"preact/": "https://esm.sh/preact@10.19.6/",
-		"prism/": "https://esm.sh/prismjs@1.29.0/components/",
+		"preact": "npm:preact@^10.22.0",
+		"prism": "npm:prism@^4.1.2",
 		"tailwindcss": "npm:tailwindcss@3.4.3",
-		"tailwindcss/": "npm:/tailwindcss@3.4.3/",
-		"tailwindcss/plugin": "npm:/tailwindcss@3.4.3/plugin.js"
+		"tailwindcss/plugin": "npm:tailwindcss@3.4.3/plugin.js"
 	},
-	"compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
-	"nodeModulesDir": true
+	"compilerOptions": {
+		"lib": [
+			"dom",
+			"dom.asynciterable",
+			"deno.ns"
+		],
+		"jsx": "precompile",
+		"jsxImportSource": "preact",
+		"jsxPrecompileSkipElements": [
+			"a",
+			"img",
+			"source",
+			"body",
+			"html",
+			"head"
+		]
+	}
 }
